@@ -1,0 +1,33 @@
+{
+  "name": "ts-chalk-logger",
+  "version": "1.0.0",
+  "description": "Colorful logging with typescript decorators.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaushiksamanta/ts-chalk-logger"
+  },
+  "author": "Kaushik Samanta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kaushiksamanta/ts-chalk-logger/issues"
+  },
+  "homepage": "https://github.com/kaushiksamanta/ts-chalk-logger#readme",
+  "devDependencies": {
+    "typescript": "^3.5.3"
+  },
+  "keywords": [
+    "chalkjs",
+    "logger",
+    "decorator",
+    "typescript"
+  ],
+  "exclude": [
+    "node_modules",
+    "lib"
+  ]
+}
