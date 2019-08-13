@@ -1,12 +1,6 @@
 {
   "include": [
-      "src/*.ts",
-      "src/**/*.ts"
-  ],
-  "exclude": [
-      "./dist",
-      "./example",
-      "./node_modules"
+      "index.ts"
   ],
   "compilerOptions": {
     "target": "es5",
