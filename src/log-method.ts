@@ -1,42 +1,23 @@
+import 'reflect-metadata';
+import chalk from 'chalk';
+const log = console.log;
+
 /**
  * Log to console name of method, value and type of each parameter and returned value with its type
  * @param target
  * @param {string} propertyName
  * @param {PropertyDescriptor} descriptor
  */
-export function logMethod(target: any, propertyName: string, descriptor: PropertyDescriptor) {
-    let oldT = target;
-    let originalMethod = descriptor.value;
-    descriptor.value = function () {
-        const args: any = arguments;
-        let returnValue = originalMethod.apply(this, arguments);
-        let stringArgsArray = Array.prototype.map.call(args, (arg: any) => `%c${JSON.stringify(arg)}%c: "${typeof arg}"%c`);
-        const stringArgs = stringArgsArray.join(', ');
+export function logMethod(target: Object, propertyName: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
 
-        let stylesArray = [];
-        for (let i = 0, max = stringArgsArray.length * 3; i < max; i++) {
-            switch (i % 3) {
-                case 0: {
-                    stylesArray.push('font-style: normal; font-weight: bold; color: blue; font-size: 12px');
-                    break;
-                }
-                case 1 : {
-                    stylesArray.push('font-style: italic;');
-                    break;
-                }
-                case 2 : {
-                    stylesArray.push('font-style: normal; color: black; font-weight: normal');
-                    break;
-                }
-            }
-        }
-
-        if (typeof returnValue == 'undefined') {
-            returnValue = 'void'
-        } else {
-            returnValue = `%c${JSON.stringify(returnValue)}%c: "${Array.isArray(returnValue) ? 'Array' : typeof returnValue}"`
-        }
-        console.log.apply(null, [`method %c${propertyName}%c = (${stringArgs}) => ${returnValue}`, 'color: red; font-size: 14px', 'color: black;', ...stylesArray, 'font-style: normal; font-weight: bold; color: green; font-size: 12px', 'font-style: italic;'] as [any]);
-        return returnValue;
+    descriptor.value = function (...args: any[]) {
+        log(chalk.blue(Reflect.getMetadata("design:type", target, propertyName)));
+        log(Reflect.getMetadata("design:paramtypes", target, propertyName));
+        log(Reflect.getMetadata("design:returntype", target, propertyName));
+        log(`${propertyName} Arguments: ${args.map(a => JSON.stringify(a)).join(',')}`);
+        const result = originalMethod.apply(this, args);
+        log(`Result: ${JSON.stringify(result)}`);
+        return result;
     }
 }
