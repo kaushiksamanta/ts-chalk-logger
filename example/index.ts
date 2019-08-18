@@ -1,5 +1,6 @@
 import { log } from '../dist';
 
+@log()
 class User {
     private _name: string;
 
@@ -7,11 +8,11 @@ class User {
         this._name = name;
     }
 
-    @log()
+    // @log()
     getUser(prefix: string, prefi2x: string): string {
         return prefix + this._name;
     }
 };
 
 const user: User = new User('Kaushik');
-console.log(user.getUser('hello', 'hi'));
+// console.log(user.getUser('hello', 'hi'));
