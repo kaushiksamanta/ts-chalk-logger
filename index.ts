@@ -1,3 +1,4 @@
+// Central exports
 export { defaultLog } from "./dist/default";
 export { log } from "./dist/log";
 export { logParam } from "./dist/log-param";
