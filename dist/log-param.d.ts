@@ -4,4 +4,4 @@
  * @param {string} key
  * @param {number} index
  */
-export declare function logParam(target: any, key: string, index: number): void;
+export declare function logParam(target: any, propertyName: string, index: number): void;

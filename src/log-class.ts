@@ -15,6 +15,7 @@ export function logClass(target: any) {
     return new c();
   }
   const newConstructor: any = function (...args: any[]) {
+    logger(chalk.blueBright('======================= LOG CLASS ================================='));
     logger(`${chalk.green(new Date().toString())} ${chalk.yellow(`Class name -->`)} ${chalk.redBright(target.name)}`);
     logger(`${chalk.green(new Date().toString())} ${chalk.yellow(`Method arguments -->`)} ${chalk.redBright(args.map(a => JSON.stringify(a)).join(','))}`);
     const result = construct(original, args);

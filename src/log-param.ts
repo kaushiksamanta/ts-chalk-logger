@@ -1,26 +1,20 @@
+import chalk from 'chalk';
+const logger = console.log;
+
 /**
  * Log to console name of parent class of mathod, also method name and number of arguments order
  * @param target
  * @param {string} key
  * @param {number} index
  */
-export function logParam(target: any, key: string, index: number) {
-    if (index > 5) {
-        console.log('Are you crazy to use so many parameters???', 'color: red, font-size: 30px')
-    }
+export function logParam(target: any, propertyName: string, index: number) {
     let getNumber = (index: number) => {
         const numberByOrder: number = index + 1;
         let suff: string = numberByOrder == 1 ? 'st' : numberByOrder == 2 ? 'nd' : numberByOrder == 3 ? 'd' : 'th';
-
-        return `${numberByOrder}%c${suff}%c`
+        return `${numberByOrder}${suff}`
     };
-
-    const data = `%cclass %c${target.constructor.name ? target.constructor.name : target.prototype.name}%c, method %c${key}%c, ${getNumber(index)} param`;
-    const styles = [
-        'font-style: italic', 'font-style: normal; font-weight: bold; color: green; font-size: 15px',
-        'font-style: italic', 'font-style: normal; font-weight: normal; color: red; font-size: 15px',
-        '',
-        'font-style: italic; font-size: 8px', 'font-style: normal',
-    ];
-    console.log.apply(null, [data, ...styles])
+    logger(chalk.blueBright('======================= LOG PARAM ================================='));
+    logger(`${chalk.green(new Date().toString())} ${chalk.yellow(`Class name -->`)} ${chalk.redBright(target.constructor.name)}`);
+    logger(`${chalk.green(new Date().toString())} ${chalk.yellow(`Method name -->`)} ${chalk.redBright(propertyName)}`);
+    logger(`${chalk.green(new Date().toString())} ${chalk.yellow(`Method param index -->`)} ${chalk.redBright(getNumber(index))}`);
 }

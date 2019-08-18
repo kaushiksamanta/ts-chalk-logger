@@ -9,10 +9,11 @@ class User {
     }
 
     @log()
-    getUser(prefix: string, prefi2x: string): string {
+    getUser(@log() prefix: string, @log() prefi2x: string): string {
         return prefix + this._name;
     }
 };
 
 const user: User = new User('Kaushik');
 console.log(user.getUser('hello', 'hi'));
+console.log(user instanceof User);

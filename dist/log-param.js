@@ -1,27 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var chalk_1 = require("chalk");
+var logger = console.log;
 /**
  * Log to console name of parent class of mathod, also method name and number of arguments order
  * @param target
  * @param {string} key
  * @param {number} index
  */
-function logParam(target, key, index) {
-    if (index > 5) {
-        console.log('Are you crazy to use so many parameters???', 'color: red, font-size: 30px');
-    }
+function logParam(target, propertyName, index) {
     var getNumber = function (index) {
         var numberByOrder = index + 1;
         var suff = numberByOrder == 1 ? 'st' : numberByOrder == 2 ? 'nd' : numberByOrder == 3 ? 'd' : 'th';
-        return numberByOrder + "%c" + suff + "%c";
+        return "" + numberByOrder + suff;
     };
-    var data = "%cclass %c" + (target.constructor.name ? target.constructor.name : target.prototype.name) + "%c, method %c" + key + "%c, " + getNumber(index) + " param";
-    var styles = [
-        'font-style: italic', 'font-style: normal; font-weight: bold; color: green; font-size: 15px',
-        'font-style: italic', 'font-style: normal; font-weight: normal; color: red; font-size: 15px',
-        '',
-        'font-style: italic; font-size: 8px', 'font-style: normal',
-    ];
-    console.log.apply(null, [data].concat(styles));
+    logger(chalk_1.default.blueBright('======================= LOG PARAM ================================='));
+    logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Class name -->") + " " + chalk_1.default.redBright(target.constructor.name));
+    logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method name -->") + " " + chalk_1.default.redBright(propertyName));
+    logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method param -->") + " " + chalk_1.default.redBright(getNumber(index)));
 }
 exports.logParam = logParam;

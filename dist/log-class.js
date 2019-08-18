@@ -20,6 +20,7 @@ function logClass(target) {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
+        logger(chalk_1.default.blueBright('======================= LOG CLASS ================================='));
         logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Class name -->") + " " + chalk_1.default.redBright(target.name));
         logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method arguments -->") + " " + chalk_1.default.redBright(args.map(function (a) { return JSON.stringify(a); }).join(',')));
         var result = construct(original, args);

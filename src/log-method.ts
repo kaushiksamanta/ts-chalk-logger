@@ -10,6 +10,7 @@ const logger = console.log;
 export function logMethod(target: any, propertyName: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = function(...args: any[]) {
+        logger(chalk.blueBright('======================= LOG METHOD ================================='));
         logger(`${chalk.green(new Date().toString())} ${chalk.yellow(`Class name -->`)} ${chalk.redBright(target.constructor.name)}`);
         logger(`${chalk.green(new Date().toString())} ${chalk.yellow(`Method name -->`)} ${chalk.redBright(propertyName)}`);
         logger(`${chalk.green(new Date().toString())} ${chalk.yellow(`Method arguments -->`)} ${chalk.redBright(args.map(a => JSON.stringify(a)).join(','))}`);
