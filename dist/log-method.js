@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("reflect-metadata");
 var chalk_1 = require("chalk");
-var log = console.log;
+var logger = console.log;
 /**
  * Log to console name of method, value and type of each parameter and returned value with its type
  * @param target
@@ -16,12 +15,11 @@ function logMethod(target, propertyName, descriptor) {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        log(chalk_1.default.blue(Reflect.getMetadata("design:type", target, propertyName)));
-        log(Reflect.getMetadata("design:paramtypes", target, propertyName));
-        log(Reflect.getMetadata("design:returntype", target, propertyName));
-        log(propertyName + " Arguments: " + args.map(function (a) { return JSON.stringify(a); }).join(','));
+        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Class name -->") + " " + chalk_1.default.redBright(target.constructor.name));
+        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method name -->") + " " + chalk_1.default.redBright(propertyName));
+        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method arguments -->") + " " + chalk_1.default.redBright(args.map(function (a) { return JSON.stringify(a); }).join(',')));
         var result = originalMethod.apply(this, args);
-        log("Result: " + JSON.stringify(result));
+        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method result -->") + " " + chalk_1.default.redBright(JSON.stringify(result)));
         return result;
     };
 }
