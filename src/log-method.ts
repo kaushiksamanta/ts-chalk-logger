@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import chalk from 'chalk';
 const log = console.log;
 
@@ -13,8 +12,6 @@ export function logMethod(target: Object, propertyName: string, descriptor: Prop
 
     descriptor.value = function (...args: any[]) {
         log(chalk.blue(Reflect.getMetadata("design:type", target, propertyName)));
-        log(Reflect.getMetadata("design:paramtypes", target, propertyName));
-        log(Reflect.getMetadata("design:returntype", target, propertyName));
         log(`${propertyName} Arguments: ${args.map(a => JSON.stringify(a)).join(',')}`);
         const result = originalMethod.apply(this, args);
         log(`Result: ${JSON.stringify(result)}`);
