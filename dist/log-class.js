@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var chalk_1 = require("chalk");
-var logger = console.log;
+var chalk_1 = __importDefault(require("chalk"));
+var log_wrapper_1 = require("./log-wrapper");
 /**
  * Log to console what instance is created
  * @param target
@@ -20,11 +23,10 @@ function logClass(target) {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        logger(chalk_1.default.blueBright('======================= LOG CLASS ================================='));
-        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Class name -->") + " " + chalk_1.default.redBright(target.name));
-        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method arguments -->") + " " + chalk_1.default.redBright(args.map(function (a) { return JSON.stringify(a); }).join(',')));
+        log_wrapper_1.logger(target.name, chalk_1.default.blueBright('======================= LOG CLASS ================================='));
+        log_wrapper_1.logger(target.name, chalk_1.default.green("Method arguments -->") + " " + chalk_1.default.yellow(args.map(function (a) { return JSON.stringify(a); }).join(',')));
         var result = construct(original, args);
-        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Object created -->") + " " + chalk_1.default.redBright(JSON.stringify(result)));
+        log_wrapper_1.logger(target.name, chalk_1.default.green("Object created -->") + " " + chalk_1.default.yellow(JSON.stringify(result)));
         return result;
     };
     newConstructor.prototype = original.prototype;

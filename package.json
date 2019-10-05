@@ -4,10 +4,9 @@
   "description": "Colorful logging with typescript decorators.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/ts-node/dist/bin.js example/index.ts",
+    "test": "tsc && ./node_modules/ts-node/dist/bin.js example/index.ts",
     "build": "tsc"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kaushiksamanta/ts-chalk-logger"
@@ -19,6 +18,7 @@
   },
   "homepage": "https://github.com/kaushiksamanta/ts-chalk-logger#readme",
   "devDependencies": {
+    "@types/node": "^12.7.11",
     "chalk": "^2.4.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
@@ -32,5 +32,6 @@
   "exclude": [
     "node_modules",
     "lib"
-  ]
+  ],
+  "dependencies": {}
 }
