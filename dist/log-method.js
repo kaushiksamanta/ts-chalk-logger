@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var chalk_1 = require("chalk");
-var logger = console.log;
+var log_wrapper_1 = require("./log-wrapper");
+var chalk_1 = __importDefault(require("chalk"));
 /**
  * Log to console name of method, value and type of each parameter and returned value with its type
  * @param target
@@ -15,12 +18,12 @@ function logMethod(target, propertyName, descriptor) {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        logger(chalk_1.default.blueBright('======================= LOG METHOD ================================='));
-        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Class name -->") + " " + chalk_1.default.redBright(target.constructor.name));
-        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method name -->") + " " + chalk_1.default.redBright(propertyName));
-        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method arguments -->") + " " + chalk_1.default.redBright(args.map(function (a) { return JSON.stringify(a); }).join(',')));
+        var className = target.constructor.name;
+        log_wrapper_1.logger(className, chalk_1.default.blueBright('======================= LOG METHOD ================================='));
+        log_wrapper_1.logger(className, chalk_1.default.green("Method name -->") + " " + chalk_1.default.yellow(propertyName));
+        log_wrapper_1.logger(className, chalk_1.default.green("Method arguments -->") + " " + chalk_1.default.yellow(args.map(function (a) { return JSON.stringify(a); }).join(',')));
         var result = originalMethod.apply(this, args);
-        logger(chalk_1.default.green(new Date().toString()) + " " + chalk_1.default.yellow("Method result -->") + " " + chalk_1.default.redBright(JSON.stringify(result)));
+        log_wrapper_1.logger(className, chalk_1.default.green("Method result -->") + " " + chalk_1.default.yellow(JSON.stringify(result)));
         return result;
     };
 }

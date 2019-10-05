@@ -24,6 +24,6 @@ function defaultLog() {
             }
         }
     }
-    throw new Error('Something went wrong with package \'ts-log-decorator\', try to specify the type');
+    throw new Error('Something went wrong with package \'ts-chalk-logger\', try to specify the type');
 }
 exports.defaultLog = defaultLog;
